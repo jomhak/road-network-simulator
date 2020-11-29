@@ -15,10 +15,34 @@ let deleteMode = false;
 let roadMode = false;
 let cityMode = false;
 let firstTimeInit = true;
-let xInputValue;
-let yInputValue;
-let cityCountInputValue;
-let config;
+let xInputValue = 10;
+let yInputValue = 10;
+let cityCountInputValue = 3;
+let config = {
+    cityNames: [
+        "Helsinki",
+        "Turku",
+        "Oulu",
+        "Jyväskylä",
+        "Vantaa",
+        "Espoo",
+        "Utsjoki",
+        "Vaasa",
+        "Kajaani",
+        "Tampere",
+        "Kotka",
+        "Kuusamo",
+        "Kuopio",
+        "Hanko",
+        "Rovaniemi",
+        "Muonio",
+        "Järvenpää"
+    ],
+    "simulation": {
+        "driverCount": 1,
+        "tick": 1000
+    }
+};
 let graph;
 let simulator;
 const onClickEvent = (e) => {
@@ -147,15 +171,10 @@ const initGrid = () => {
         simulator.tick = Number(tickInput.value);
     }
 };
-const initOnPageLoad = async () => {
-    const configFetch = await fetch("/config.json");
-    config = await configFetch.json();
+const initOnPageLoad = () => {
     console.log("Config", config);
-    xInputValue = config.grid.x;
     xInput.value = String(xInputValue);
-    yInputValue = config.grid.y;
     yInput.value = String(yInputValue);
-    cityCountInputValue = config.grid.cityCount;
     cityCountInput.value = String(cityCountInputValue);
     worldButton.addEventListener("click", () => initGrid());
 };
