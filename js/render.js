@@ -1,18 +1,13 @@
 import { graph, onClickEvent, simulator } from "./index.js";
-import { GraphNode, NodeStatus } from "./graph.js";
-
-// Create the grid element and generate the graph nodes
+import { NodeStatus } from "./graph.js";
 const createGridElement = () => {
-    const gridContainer = document.querySelector("#grid-container") as HTMLDivElement;
+    const gridContainer = document.querySelector("#grid-container");
     while (gridContainer?.firstChild) {
         gridContainer.removeChild(gridContainer.firstChild);
     }
-
-    // Create grid rows (y-axis)
     for (let gridY = 0; gridY < graph.y; gridY++) {
         const gridRowDiv = document.createElement("div");
         gridRowDiv.className = "grid-row";
-        // Create grid units (x-axis)
         for (let gridX = 0; gridX < graph.x; gridX++) {
             const gridUnit = document.createElement("div");
             const gridUnitNode = graph.findNodeByCoordinates(gridX, gridY);
@@ -37,14 +32,12 @@ const createGridElement = () => {
         }
         gridContainer?.appendChild(gridRowDiv);
     }
-}
-
-// Update the changed nodes since last update
+};
 const updateGridElement = () => {
-    const gridContainer = document.querySelector("#grid-container") as HTMLDivElement;
-    let x: number = 0;
-    let y: number = 0;
-    for (const gridRow of gridContainer.children as any) {
+    const gridContainer = document.querySelector("#grid-container");
+    let x = 0;
+    let y = 0;
+    for (const gridRow of gridContainer.children) {
         for (const gridUnit of gridRow.children) {
             const gridUnitNode = graph.findNodeByCoordinates(x, y);
             const gridUnitImg = gridUnit.querySelector(".grid-unit-img");
@@ -65,17 +58,15 @@ const updateGridElement = () => {
         x = 0;
         y++;
     }
-}
-
-// Check the directions of nodes edge nodes
-const getNodeAdjacencies = (node: GraphNode): Object => {
+};
+const getNodeAdjacencies = (node) => {
     const adjacencies = {
         up: false,
         down: false,
         right: false,
         left: false
     };
-    const adjacentNodes: Array<GraphNode> = node.edges;
+    const adjacentNodes = node.edges;
     for (const adjacentNode of adjacentNodes) {
         if (node.x === adjacentNode.x && node.y === adjacentNode.y + 1) {
             adjacencies.up = true;
@@ -95,12 +86,10 @@ const getNodeAdjacencies = (node: GraphNode): Object => {
         }
     }
     return adjacencies;
-}
-
-// Determine the road image by checking its edge nodes
-const getRoadImageSrc = (node: GraphNode): string => {
-    let imageSrc: string = "abc";
-    const a: any = getNodeAdjacencies(node);
+};
+const getRoadImageSrc = (node) => {
+    let imageSrc = "abc";
+    const a = getNodeAdjacencies(node);
     switch (true) {
         case a.up && !a.down && !a.right && !a.left:
             imageSrc = "img/road-up.png";
@@ -151,24 +140,20 @@ const getRoadImageSrc = (node: GraphNode): string => {
             imageSrc = "img/road-cross.png";
     }
     return imageSrc;
-}
-
-// Render the drivers
+};
 const renderDrivers = () => {
     const driverDivs = document.querySelectorAll(".driver-img");
     driverDivs.forEach(div => {
         div.remove();
     });
-
     for (const driver of simulator.drivers) {
         const gridUnitId = `${driver.location.x},${driver.location.y}`;
         const gridUnit = document.getElementById(gridUnitId);
         const driverImg = document.createElement("img");
-        driverImg.className ="driver-img";
+        driverImg.className = "driver-img";
         driverImg.src = "img/driver.png";
         driverImg.addEventListener("click", (e) => onClickEvent(e));
         gridUnit?.appendChild(driverImg);
     }
-}
-
-export { createGridElement, updateGridElement, renderDrivers }
+};
+export { createGridElement, updateGridElement, renderDrivers };
