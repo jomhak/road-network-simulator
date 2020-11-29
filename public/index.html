@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Traffic Simulator</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+    </head>
+    <body>
+        <div id="main-container">
+            <div id="left-panel-container">
+                <div class="setting-section">
+                    <p><b>World settings</b></p>
+                    <p class="settings-text">X-axis</p>
+                    <input type="number" id="x-input" value="0" />
+                    <p class="settings-text">Y-axis</p>
+                    <input type="number" id="y-input" value="0" />
+                    <p class="settings-text">Amount of cities</p>
+                    <input type="number" id="cityCount-input" value="0" />
+                    <input type="button" id="world-button" value="Create world" />
+                </div>
+                <div class="setting-section">
+                    <p><b>Edit grid</b></p>
+                    <input type="button" id="delete-button" value="Delete Mode: Off" disabled />
+                    <input type="button" id="road-button" value="Road Mode: Off" disabled />
+                    <input type="button" id="city-button" value="City Mode: Off" disabled />
+                </div>
+                <div class="setting-section">
+                    <p><b>Simulation settings</b></p>
+                    <input type="button" id="pause-button" value="Start simulation" disabled />
+                    <p class="settings-text">Amount of drivers</p>
+                    <input type="number" id="driver-input" value="0" disabled />
+                    <p class="settings-text">Simulation speed (milliseconds per tick)</p>
+                    <input type="number" id="tick-input" value="0" disabled />
+                </div>
+            </div>
+            <div id="right-panel-container">
+                <div id="grid-container"></div>
+            </div>
+        </div>
+
+        <script type="module" src="js/index.js"></script>
+    </body>
+</html>
