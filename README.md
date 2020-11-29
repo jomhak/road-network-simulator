@@ -1,8 +1,10 @@
-#Road Network Simulator
+# Road Network Simulator
 
 Generate and edit a road network grid in your browser and watch as the drivers figure out their way.
 
-##Install and run on your machine
+[Test online on GitHub Pages](https://jomhak.github.io/road-network-simulator/)
+
+## Install and run on your machine
 1. Clone the repository
 `git clone https://github.com/jomhak/road-network-simulator.git`
 2. Download the NPM dependencies
